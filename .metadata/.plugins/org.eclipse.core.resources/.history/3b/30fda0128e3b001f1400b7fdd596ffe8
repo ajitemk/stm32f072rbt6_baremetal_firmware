@@ -10,7 +10,7 @@
 #define HIGH 1
 #define LOW 0
 #define BTNPRESSED LOW
-uint32_t moc_cut=0;
+uint32 moc_cut=0;
 int main(void)
 {
 	GPIO_Handle_t GpioLedPC0,GpioButtonPC5;

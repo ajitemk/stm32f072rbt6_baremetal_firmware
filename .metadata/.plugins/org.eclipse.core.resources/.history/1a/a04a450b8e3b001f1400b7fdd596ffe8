@@ -10,7 +10,6 @@
 #define HIGH 1
 #define LOW 0
 #define BTNPRESSED LOW
-uint32_t moc_cut=0;
 int main(void)
 {
 	GPIO_Handle_t GpioLedPC0,GpioButtonPC5;
@@ -37,14 +36,7 @@ int main(void)
 	//IRQ configuration
 	GPIO_IRQPriorityConfig(IRQ_NO_EXTI0_1, NVIC_IRQ_PRI_12);
 	GPIO_IRQInterruptConfig(IRQ_NO_EXTI0_1, ENABLE);
-	while(1)
-	{
-		if(moc_cut == 1)
-		{
-		GPIO_ToggleOutputPin(GPIOC, GPIO_PIN_NO_0);
-		moc_cut=0;
-		}
-	}
+	while(1);
 
 
 }//end of main
@@ -52,5 +44,5 @@ int main(void)
 void EXTI0_1_IRQHandler(void)
 {
 	GPIO_IRQHandling(GPIO_PIN_NO_1);//clear the pending event from exti line
-	moc_cut++;
+	GPIO_ToggleOutputPin(GPIOC, GPIO_PIN_NO_0);
 }

@@ -176,7 +176,7 @@ typedef struct{
 									(x == GPIOF)?5 :0)
 
 
-#define IRQ_NO_EXTI0_1	5 // see position in reference manual "Vector table (continued)"
+#define IRQ_NO_EXTI0_1	5 // see position in reference manual
 #define IRQ_NO_EXTI2_3	6
 #define IRQ_NO_EXTI4_15	7
 
