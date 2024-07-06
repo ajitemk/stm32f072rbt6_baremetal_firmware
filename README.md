@@ -1,0 +1,1 @@
+# stm32f072rbt6_baremetal_firmware
