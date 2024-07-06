@@ -1,0 +1,13 @@
+/*
+ * main.c
+ *
+ *  Created on: Jul 4, 2024
+ *      Author: ADMIN
+ */
+
+
+int main(void)
+{
+
+	return 0;
+}

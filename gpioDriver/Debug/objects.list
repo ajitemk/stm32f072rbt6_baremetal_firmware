@@ -1,0 +1,5 @@
+"./Drivers/driver_SRC/stm32f072rbt6_GPIO_Driver.o"
+"./Src/buttonInterrupt.o"
+"./Src/syscalls.o"
+"./Src/sysmem.o"
+"./Startup/startup_stm32f072rbtx.o"

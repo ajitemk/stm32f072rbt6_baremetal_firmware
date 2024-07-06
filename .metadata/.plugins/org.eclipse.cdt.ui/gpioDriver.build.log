@@ -1,0 +1,18 @@
+15:29:34 **** Incremental Build of configuration Debug for project gpioDriver ****
+make -j12 all 
+arm-none-eabi-gcc "../Src/buttonInterrupt.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F0 -DSTM32F072RBTx -c -I../Inc -I"E:/Ajitem Kudtarkar/STM32/Ajitem_Projects/STM32_Projects/STM32F072RBT6/gpioDriver/Drivers/driver_INC" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/buttonInterrupt.d" -MT"Src/buttonInterrupt.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/buttonInterrupt.o"
+arm-none-eabi-gcc "../Drivers/driver_SRC/stm32f072rbt6_GPIO_Driver.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F0 -DSTM32F072RBTx -c -I../Inc -I"E:/Ajitem Kudtarkar/STM32/Ajitem_Projects/STM32_Projects/STM32F072RBT6/gpioDriver/Drivers/driver_INC" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/driver_SRC/stm32f072rbt6_GPIO_Driver.d" -MT"Drivers/driver_SRC/stm32f072rbt6_GPIO_Driver.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/driver_SRC/stm32f072rbt6_GPIO_Driver.o"
+arm-none-eabi-gcc -o "gpioDriver.elf" @"objects.list"   -mcpu=cortex-m0 -T"E:\Ajitem Kudtarkar\STM32\Ajitem_Projects\STM32_Projects\STM32F072RBT6\gpioDriver\STM32F072RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="gpioDriver.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: gpioDriver.elf
+ 
+arm-none-eabi-size   gpioDriver.elf 
+arm-none-eabi-objdump -h -S  gpioDriver.elf  > "gpioDriver.list"
+   text	   data	    bss	    dec	    hex	filename
+   1880	      8	   1568	   3456	    d80	gpioDriver.elf
+Finished building: default.size.stdout
+ 
+Finished building: gpioDriver.list
+ 
+
+15:29:34 Build Finished. 0 errors, 0 warnings. (took 273ms)
+
