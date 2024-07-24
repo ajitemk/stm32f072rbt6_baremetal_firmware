@@ -1,4 +1,6 @@
+"./Drivers/driver_SRC/i2c_Driver.o"
 "./Drivers/driver_SRC/stm32f072rbt6_GPIO_Driver.o"
+"./Drivers/driver_SRC/usart_driver.o"
 "./Src/buttonInterrupt.o"
 "./Src/syscalls.o"
 "./Src/sysmem.o"

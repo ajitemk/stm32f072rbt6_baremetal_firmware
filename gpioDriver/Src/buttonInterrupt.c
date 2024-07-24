@@ -29,8 +29,8 @@ int main(void)
 	GPIO_Init(&GpioLedPC0);
 
 	GpioButtonPC5.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_1;
-	GpioButtonPC5.GPIO_PinConfig.GPIO_PinMode=	GPIO_MODE_IT_FT;
-	GpioButtonPC5.GPIO_PinConfig.GPIO_PinSpeed=	GPIO_SPEED_FAST;
+	GpioButtonPC5.GPIO_PinConfig.GPIO_PinMode	=	GPIO_MODE_IT_FT;
+	GpioButtonPC5.GPIO_PinConfig.GPIO_PinSpeed	=	GPIO_SPEED_FAST;
 	GpioButtonPC5.GPIO_PinConfig.GPIO_PinPuPdControl=GPIO_PIN_PU;
 	GPIO_Init(&GpioButtonPC5);
 

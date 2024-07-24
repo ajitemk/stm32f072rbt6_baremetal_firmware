@@ -59,12 +59,13 @@
 #define ADC_BASEADDR			(APB2PERIPH_BASE+0x2400)
 #define SP1_BASEADDR			(APB2PERIPH_BASE+0x3000)
 #define USART1_BASEADDR			(APB2PERIPH_BASE+0x3800)
+#define USART2_BASEADDR			(APB1PERIPH_BASE+0x4400)
 #define RCC_BASEADDR			(AHB1PERIPH_BASE+0x1000)
 
 
 #define EXTI_BASEADDR			(APB2PERIPH_BASE+0x0400)
 #define SYSCFG_BASEADDR			(APB2PERIPH_BASE)
-/* peripheral refister defination structure */
+/* peripheral refister defination structure for gpio*/
 
 typedef struct{
 	__VO uint32_t MODER;		/*GPIO port mode register				   0x00	*/
@@ -80,7 +81,9 @@ typedef struct{
 	/*[1]GPIO alternate function high register 0x28	*/
 }GPIO_RegDef_t;
 
-
+/*
+ * peripheral refister defination structure for RCC
+ */
 typedef struct{
 	__VO uint32_t RCC_CR;
 	__VO uint32_t RCC_CFGR;
@@ -96,7 +99,6 @@ typedef struct{
 	__VO uint32_t RCC_CFGR2;
 	__VO uint32_t RCC_CFGR3;
 	__VO uint32_t RCC_CR2;
-
 }RCC_RegDef_t;
 
 /*
@@ -110,7 +112,9 @@ typedef struct{
 	__VO uint32_t EXTI_SWIER;
 	__VO uint32_t EXTI_PR;
 }EXTI_RegDef_t;
-
+/*
+ * peripheral refister defination structure for SYSCFG
+ */
 typedef struct{
 	__VO uint32_t SYSCFG_CFGR1;
 	__VO uint32_t rev;
@@ -118,6 +122,43 @@ typedef struct{
 	__VO uint32_t SYSCFG_CFGR2;
 }SYSCFG_RegDef_t;
 
+/*
+ * peripheral refister defination structure for i2c
+ */
+typedef struct{
+	__VO uint32_t I2C_CR1;
+	__VO uint32_t I2C_CR2;
+	__VO uint32_t I2C_OAR1;
+	__VO uint32_t I2C_OAR2;
+	__VO uint32_t I2C_TIMINGR;
+	__VO uint32_t I2C_TIMEOUTR;
+	__VO uint32_t I2C_ISR;
+	__VO uint32_t I2C_ICR;
+	__VO uint32_t I2C_PECR;
+	__VO uint32_t I2C_TXDR;
+}I2C_RegDef_t;
+
+
+/*
+ * peripheral register definition structure for usart
+ */
+typedef struct{
+	__VO uint32_t USART_CR1;	//00
+	__VO uint32_t USART_CR2;	//04
+	__VO uint32_t USART_CR3;	//08
+	__VO uint32_t USART_BRR;	//0c
+	__VO uint32_t USART_GTPR;	//10
+	__VO uint32_t USART_RTOR;	//14
+	__VO uint32_t USART_RQR;	//18
+
+	__VO uint32_t USART_ISR;	//1c
+	__VO uint32_t USART_ICR;	//20
+	__VO uint32_t USART_RDR;	//24
+	__VO uint32_t USART_TDR;	//28	_
+}USART_RegDef_t;
+typedef struct{
+
+}I2C2_RegDef_t;
 #define GPIOA ((GPIO_RegDef_t*)GPIOA_BASEADDR)
 #define GPIOB ((GPIO_RegDef_t*)GPIOB_BASEADDR)
 #define GPIOC ((GPIO_RegDef_t*)GPIOC_BASEADDR)
@@ -128,6 +169,21 @@ typedef struct{
 #define RCC 	((RCC_RegDef_t*)RCC_BASEADDR)
 #define EXTI 	((EXTI_RegDef_t*)EXTI_BASEADDR)
 #define SYSCFG 	((SYSCFG_RegDef_t*)SYSCFG_BASEADDR)
+
+/*
+ * i2c peripheral definition macro
+ */
+#define I2C1	(I2C_RegDef_t*)(I2C1_BASEADDR)
+#define I2C2	(I2C_RegDef_t*)(I2C2_BASEADDR)
+
+/*
+ * usart1 peripheral definition macro
+ */
+#define USART2	(USART_RegDef_t*)(USART2_BASEADDR)
+//#define I2C2	(I2C_RegDef_t*)(I2C2_BASEADDR)
+
+
+
 /* Clock Enable for GPIO Peripherals
  * AHB peripheral clock enable register (RCC_AHBENR)*/
 #define GPIOA_PCLK_EN	(RCC->RCC_AHBENR |= (1<<17))
@@ -156,7 +212,131 @@ typedef struct{
 /*APB1 peripheral clock disable register 1 (RCC_APB1ENR)*/
 #define SPI2_PCLK_DI ((RCC->RCC_APB1ENR) &= (~(1<<14)))
 
+/* Clock Enable for I2Cx Peripherals
+ * APB peripheral clock enable register 1 (RCC_APB1ENR)*/
+#define I2C1_PCLK_EN	(RCC->RCC_APB1ENR |= (1<<21))
+#define I2C2_PCLK_EN	(RCC->RCC_APB1ENR |= (1<<22))
+/*
+ * clcok enable for usart2 register
+ */
+//APB peripheral clock enable register 1 (RCC_APB1ENR)
+#define USART2_PCLK_EN 	(RCC->RCC_APB1ENR |= (1<<17))
 
+/*
+ * clcok enable for usart2 register
+ */
+//APB peripheral clock enable register 1 (RCC_APB1ENR)
+#define USART2_PCLK_DI 	(RCC->RCC_APB1ENR &= ~(1<<17))
+
+
+/*
+ * bit position defination for i2c register
+ */
+/*
+ * bit position defination for I2C control register 1
+ */
+//I2C_CR1_PIN;
+#define  I2C_CR1_PE 		0
+#define	 I2C_CR1_TXIE		1
+#define I2C_CR1_RXIE		2
+#define I2C_CR1_ADDRIE		3
+#define I2C_CR1_NACKIE		4
+#define I2C_CR1_STOPIE		5
+#define I2C_CR1_TCIE		6
+#define I2C_CR1_ERRIE		7
+#define I2C_CR1_DNF1		8
+#define I2C_CR1_DNF2		9
+#define I2C_CR1_DNF3		10
+#define I2C_CR1_DNF4		11
+#define I2C_CR1_ANFOFF		12
+#define I2C_CR1_RESERVED	13
+#define I2C_CR1_TXDMAEN		14
+#define I2C_CR1_RXDMAEN		15
+#define I2C_CR1_SBC			16
+#define I2C_CR1_NOSTRETCH	17
+#define I2C_CR1_WUPEN		18
+#define I2C_CR1_GCEN		19
+#define I2C_CR1_SMBHEN		20
+#define I2C_CR1_SMBDEN		21
+#define I2C_CR1_ALERTEN		22
+#define I2C_CR1_PECEN		23
+#define I2C_CR1_RESERVED_1	24
+#define I2C_CR1_RESERVED_2	25
+#define I2C_CR1_RESERVED_3	26
+#define I2C_CR1_RESERVED_4	27
+#define I2C_CR1_RESERVED_5	28
+#define I2C_CR1_RESERVED_6	29
+#define I2C_CR1_RESERVED_7	30
+#define I2C_CR1_RESERVED_8	31
+
+//I2C_CR2_PIN;
+#define  I2C_CR2_SADD_0 		0
+#define	 I2C_CR2_SADD_1			1
+#define I2C_CR2_SADD_2			2
+#define I2C_CR2_SADD_3			3
+#define I2C_CR2_SADD_4			4
+#define I2C_CR2_SADD_5			5
+#define I2C_CR2_SADD_6			6
+#define I2C_CR2_SADD_7			7
+#define I2C_CR2_SADD_8			8
+#define I2C_CR2_SADD_9			9
+#define I2C_CR2_RD_WRN			10
+#define I2C_CR2_ADD10			11
+#define I2C_CR2_HEAD10R			12
+#define I2C_CR2_START			13
+#define I2C_CR2_STOP			14
+#define I2C_CR2_NACK			15
+#define I2C_CR2_NBYTES_0		16
+#define I2C_CR2_NBYTES_1		17
+#define I2C_CR2_NBYTES_2		18
+#define I2C_CR2_NBYTES_3		19
+#define I2C_CR2_NBYTES_4		20
+#define I2C_CR2_NBYTES_5		21
+#define I2C_CR2_NBYTES_6		22
+#define I2C_CR2_NBYTES_7		23
+#define I2C_CR2_RELOAD			24
+#define I2C_CR2_AUTOEND			25
+#define I2C_CR2_PECBYTE			26
+#define I2C_CR2_RESERVED_0		27
+#define I2C_CR2_RESERVED_1		28
+#define I2C_CR2_RESERVED_2		29
+#define I2C_CR2_RESERVED_3		30
+#define I2C_CR2_RESERVED_4		31
+//typedef enum
+//{
+//	 PE=0,
+//	 TXIE,
+//	 RXIE,
+//	 ADDRIE,
+//	 NACKIE,
+//	 STOPIE,
+//	 TCIE,
+//	 ERRIE,
+//	 DNF1,
+//	 DNF2,
+//	 DNF3,
+//	 DNF4,
+//	 ANFOFF,
+//	 RESERVED,
+//	 TXDMAEN,
+//	 RXDMAEN,
+//	 SBC,
+//	 NOSTRETCH,
+//	 WUPEN,
+//	 GCEN,
+//	 SMBHEN,
+//	 SMBDEN,
+//	 ALERTEN,
+//	 PECEN,
+//	 RESERVED_1,
+//	 RESERVED_2,
+//	 RESERVED_3,
+//	 RESERVED_4,
+//	 RESERVED_5,
+//	 RESERVED_6,
+//	 RESERVED_7,
+//	 RESERVED_8
+//}I2C_CR1_PIN;
 
 /*
  *	Macro to Reset GPIO Peripheral
@@ -208,5 +388,7 @@ typedef struct{
 #define GPIO_PIN_RESET	RESET
 
 #include"stm32f072rbt6_GPIO_Driver.h"
+#include"i2c_Driver.h"
+#include"usart_driver.h"
 
 #endif /* DRIVER_INC_STM32F072RBT6_H_ */
