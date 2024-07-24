@@ -1,0 +1,4 @@
+"./Src/0_led_toogle_creating_symbolicName_of_address_from_reference_manual.o"
+"./Src/syscalls.o"
+"./Src/sysmem.o"
+"./Startup/startup_stm32f072rbtx.o"

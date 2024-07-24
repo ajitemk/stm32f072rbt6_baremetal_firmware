@@ -1,0 +1,2 @@
+Src/0_led_toogle_creating_symbolicName_of_address_from_reference_manual.o: \
+ ../Src/0_led_toogle_creating_symbolicName_of_address_from_reference_manual.c
